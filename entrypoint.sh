@@ -69,6 +69,9 @@ wait_for_sql
 if [ "$NODE_ROLE" = "primary" ]; then
     echo "=== Configuring PRIMARY node ==="
 
+    # Clean up old certificate files if they exist
+    rm -f /var/opt/mssql/ag_cert.cer /var/opt/mssql/ag_cert.pvk
+
     # Run primary setup
     run_sql_file /scripts/01_primary_setup.sql
 
@@ -99,6 +102,9 @@ elif [ "$NODE_ROLE" = "secondary" ]; then
 
     # Wait for primary to be ready first
     wait_for_remote_sql "sqlserver-primary"
+
+    # Clean up old certificate files if they exist
+    rm -f /var/opt/mssql/ag_cert_secondary.cer /var/opt/mssql/ag_cert_secondary.pvk
 
     # Run secondary setup
     run_sql_file /scripts/01_secondary_setup.sql
