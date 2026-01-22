@@ -104,7 +104,7 @@ elif [ "$NODE_ROLE" = "secondary" ]; then
     run_sql_file /scripts/01_secondary_setup.sql
 
     # Export certificates to shared volume
-    cp /var/opt/mssql/ag_cert_secondary.cer "$CERTS_DIR/secondary_cert. cer"
+    cp /var/opt/mssql/ag_cert_secondary.cer "$CERTS_DIR/secondary_cert.cer"
     cp /var/opt/mssql/ag_cert_secondary.pvk "$CERTS_DIR/secondary_cert.pvk"
 
     # Signal that secondary certs are ready
