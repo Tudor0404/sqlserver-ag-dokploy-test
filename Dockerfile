@@ -25,6 +25,9 @@ COPY entrypoint.sh /entrypoint.sh
 COPY scripts/ /scripts/
 RUN chmod +x /entrypoint.sh /scripts/*.sh 2>/dev/null || true
 
+# Create certs directory with proper permissions
+RUN mkdir -p /certs && chown -R mssql:mssql /certs
+
 USER mssql
 
 ENTRYPOINT ["/entrypoint.sh"]

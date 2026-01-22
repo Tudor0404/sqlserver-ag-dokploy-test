@@ -1,4 +1,4 @@
-﻿USE master;
+USE master;
 GO
 
 -- Import secondary certificate

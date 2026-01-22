@@ -1,4 +1,4 @@
-﻿#!/bin/bash
+#!/bin/bash
 set -e
 
 SA_PASSWORD="${MSSQL_SA_PASSWORD}"
