@@ -3,17 +3,17 @@ GO
 
 -- Create master key
 IF NOT EXISTS (SELECT * FROM sys.symmetric_keys WHERE name = '##MS_DatabaseMasterKey##')
-    CREATE MASTER KEY ENCRYPTION BY PASSWORD = 'YourStrong! Passw0rd';
+    CREATE MASTER KEY ENCRYPTION BY PASSWORD = 'YourStrong!Passw0rd';
 GO
 
 -- Create certificate
-IF NOT EXISTS (SELECT * FROM sys. certificates WHERE name = 'AG_Cert')
+IF NOT EXISTS (SELECT * FROM sys.certificates WHERE name = 'AG_Cert')
     CREATE CERTIFICATE AG_Cert WITH SUBJECT = 'AG Certificate for Primary';
 GO
 
 -- Backup certificate
 BACKUP CERTIFICATE AG_Cert
-TO FILE = '/var/opt/mssql/ag_cert. cer'
+TO FILE = '/var/opt/mssql/ag_cert.cer'
 WITH PRIVATE KEY (
     FILE = '/var/opt/mssql/ag_cert.pvk',
     ENCRYPTION BY PASSWORD = 'CertPassword123!'
@@ -37,7 +37,7 @@ IF NOT EXISTS (SELECT * FROM sys.server_principals WHERE name = 'AG_Login')
     CREATE LOGIN AG_Login WITH PASSWORD = 'AGLoginPassword123!';
 GO
 
-IF NOT EXISTS (SELECT * FROM sys. database_principals WHERE name = 'AG_User')
+IF NOT EXISTS (SELECT * FROM sys.database_principals WHERE name = 'AG_User')
     CREATE USER AG_User FOR LOGIN AG_Login;
 GO
 
@@ -51,7 +51,7 @@ GO
 USE TestAGDB;
 GO
 
-IF NOT EXISTS (SELECT * FROM sys. tables WHERE name = 'TestTable')
+IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'TestTable')
 BEGIN
 CREATE TABLE TestTable (
                            ID INT PRIMARY KEY IDENTITY(1,1),
@@ -67,5 +67,5 @@ BACKUP DATABASE TestAGDB TO DISK = '/var/opt/mssql/TestAGDB.bak' WITH FORMAT, IN
 BACKUP LOG TestAGDB TO DISK = '/var/opt/mssql/TestAGDB_log.trn' WITH FORMAT, INIT;
 GO
 
-PRINT 'Primary initial setup complete. ';
+PRINT 'Primary initial setup complete.';
 GO

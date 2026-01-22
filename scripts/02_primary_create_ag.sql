@@ -2,7 +2,7 @@ USE master;
 GO
 
 -- Import secondary certificate
-IF NOT EXISTS (SELECT * FROM sys. certificates WHERE name = 'AG_Cert_Secondary')
+IF NOT EXISTS (SELECT * FROM sys.certificates WHERE name = 'AG_Cert_Secondary')
     CREATE CERTIFICATE AG_Cert_Secondary
         AUTHORIZATION AG_User
         FROM FILE = '/var/opt/mssql/secondary_cert.cer'
@@ -12,7 +12,7 @@ IF NOT EXISTS (SELECT * FROM sys. certificates WHERE name = 'AG_Cert_Secondary')
         );
 GO
 
-GRANT CONNECT ON ENDPOINT:: AG_Endpoint TO AG_Login;
+GRANT CONNECT ON ENDPOINT::AG_Endpoint TO AG_Login;
 GO
 
 -- Create the Availability Group

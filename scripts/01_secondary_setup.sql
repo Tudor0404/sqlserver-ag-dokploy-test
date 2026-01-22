@@ -41,5 +41,5 @@ IF NOT EXISTS (SELECT * FROM sys.database_principals WHERE name = 'AG_User')
     CREATE USER AG_User FOR LOGIN AG_Login;
 GO
 
-PRINT 'Secondary initial setup complete. ';
+PRINT 'Secondary initial setup complete.';
 GO
