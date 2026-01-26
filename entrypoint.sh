@@ -90,6 +90,10 @@ if [ "$NODE_ROLE" = "primary" ]; then
     cp "$CERTS_DIR/secondary_cert.cer" /var/opt/mssql/
     cp "$CERTS_DIR/secondary_cert.pvk" /var/opt/mssql/
 
+    # Clean up existing AG if present (to allow reconfiguration)
+    echo "Running AG cleanup..."
+    run_sql_file /scripts/00_cleanup_ag.sql
+
     # Complete AG setup on primary
     run_sql_file /scripts/02_primary_create_ag.sql
 
