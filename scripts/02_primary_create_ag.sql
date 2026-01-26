@@ -30,6 +30,7 @@ IF NOT EXISTS (SELECT * FROM sys.availability_groups WHERE name = 'TestAG')
             AVAILABILITY_MODE = SYNCHRONOUS_COMMIT,
             FAILOVER_MODE = MANUAL,
             SEEDING_MODE = AUTOMATIC,
+            BACKUP_PRIORITY = 70,
             SECONDARY_ROLE (ALLOW_CONNECTIONS = ALL)
         ),
         N'sqlserver-secondary' WITH (
@@ -37,6 +38,7 @@ IF NOT EXISTS (SELECT * FROM sys.availability_groups WHERE name = 'TestAG')
             AVAILABILITY_MODE = SYNCHRONOUS_COMMIT,
             FAILOVER_MODE = MANUAL,
             SEEDING_MODE = AUTOMATIC,
+            BACKUP_PRIORITY = 30,
             SECONDARY_ROLE (ALLOW_CONNECTIONS = ALL)
         );
 GO
